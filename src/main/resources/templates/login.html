@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logowanie - Quiz App</title>
+</head>
+<body>
+    <h1>Logowanie</h1>
+    <p th:if="${param.error}">Nieprawidłowy email lub hasło.</p>
+    <p th:if="${param.logout}">Zostałeś wylogowany.</p>
+    <p th:if="${param.registered}">Konto zostało utworzone. Możesz się zalogować.</p>
+    <form method="post" action="/login">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label>Email: <input type="email" name="email" required></label><br>
+        <label>Hasło: <input type="password" name="password" required></label><br>
+        <button type="submit">Zaloguj</button>
+    </form>
+    <a href="/users/register">Utwórz konto</a>
+</body>
+</html>

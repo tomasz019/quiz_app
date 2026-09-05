@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moje quizy - Quiz App</title>
+</head>
+<body>
+    <h1>Moje quizy</h1>
+    <p th:if="${error}" th:text="${error}"></p>
+    <a href="/quizzes/new">Dodaj quiz</a><br>
+    <a href="/">Powrót</a>
+    <ul>
+        <li th:each="quiz : ${quizzes}">
+            <span th:text="${quiz.title}"></span>
+            <a th:href="@{/quizzes/{id}/questions(id=${quiz.id})}">Podgląd</a>
+            <a th:href="@{/quizzes/{id}/edit(id=${quiz.id})}">Edytuj</a>
+            <form method="post" th:action="@{/quizzes/{id}/delete(id=${quiz.id})}" style="display:inline">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit">Usuń</button>
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

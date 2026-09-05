@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${quiz != null and quiz.id != null ? 'Edycja quizu' : 'Nowy quiz'}">Quiz</title>
+</head>
+<body>
+    <h1 th:text="${quiz != null and quiz.id != null ? 'Edytuj quiz' : 'Dodaj quiz'}">Quiz</h1>
+    <p th:if="${error}" th:text="${error}"></p>
+    <form method="post" th:action="${quiz != null and quiz.id != null ? '/quizzes/' + quiz.id : '/quizzes'}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label>Tytuł: <input type="text" name="title" th:value="${quiz != null ? quiz.title : ''}" required maxlength="255"></label>
+        <button type="submit">Zapisz</button>
+    </form>
+    <a href="/quizzes">Anuluj</a>
+</body>
+</html>

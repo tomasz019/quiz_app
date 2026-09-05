@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja - Quiz App</title>
+</head>
+<body>
+    <h1>Rejestracja</h1>
+    <p th:if="${error}" th:text="${error}"></p>
+    <form method="post" action="/users/register">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label>Nazwa użytkownika: <input type="text" name="username" required></label><br>
+        <label>Email: <input type="email" name="email" required></label><br>
+        <label>Hasło (min. 8 znaków): <input type="password" name="password" required minlength="8"></label><br>
+        <button type="submit">Zarejestruj</button>
+    </form>
+    <a href="/login">Mam już konto</a>
+</body>
+</html>

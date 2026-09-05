@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${question != null ? 'Edycja pytania' : 'Nowe pytanie'}">Pytanie</title>
+</head>
+<body>
+    <h1 th:text="${question != null ? 'Edytuj pytanie' : 'Dodaj pytanie'}">Pytanie</h1>
+    <p th:text="'Quiz: ' + ${quiz.title}"></p>
+    <p th:if="${error}" th:text="${error}"></p>
+    <form method="post"
+          th:action="${question != null
+              ? '/quizzes/' + quiz.id + '/questions/' + question.id
+              : '/quizzes/' + quiz.id + '/questions'}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label>
+            Treść pytania:
+            <textarea name="content" required th:text="${question != null ? question.content : ''}"></textarea>
+        </label><br>
+        <label>
+            Czas odpowiedzi (sekundy):
+            <input type="number" name="timeLimit" min="1" required
+                   th:value="${question != null ? question.timeLimit : ''}">
+        </label><br>
+        <button type="submit">Zapisz</button>
+    </form>
+    <a th:href="@{/quizzes/{id}/questions(id=${quiz.id})}">Anuluj</a>
+</body>
+</html>

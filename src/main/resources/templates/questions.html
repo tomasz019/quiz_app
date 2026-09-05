@@ -16,6 +16,9 @@
             <a th:href="@{/quizzes/{quizId}/questions/{questionId}/edit(quizId=${quiz.id}, questionId=${question.id})}">
                 Edytuj
             </a>
+            <a th:href="@{/quizzes/{quizId}/questions/{questionId}/answers(quizId=${quiz.id}, questionId=${question.id})}">
+                Dodaj odpowiedzi
+            </a>
             <form method="post"
                   th:action="@{/quizzes/{quizId}/questions/{questionId}/delete(quizId=${quiz.id}, questionId=${question.id})}"
                   style="display:inline">
